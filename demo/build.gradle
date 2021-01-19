@@ -13,17 +13,25 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    
+	// Redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'it.ozimov:embedded-redis:0.7.2'
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+	
+    // Lombok
 	implementation 'org.projectlombok:lombok'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// Swagger
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 }
 
 test {
