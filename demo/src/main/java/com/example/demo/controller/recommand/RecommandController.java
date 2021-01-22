@@ -37,7 +37,7 @@ public class RecommandController {
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
 		}
-		
+		 
 		String apiURL = "https://openapi.naver.com/v1/search/shop.json?query=" + text;
 		
 		Map<String, String> requestHeaders = new HashMap<>();
