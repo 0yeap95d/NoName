@@ -10,14 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardSaveRequestDto {
 	
-	private Long id;
 	private String title;
 	private String content;
 	private String author;
 
 	@Builder
-	public BoardSaveRequestDto(Long id, String title, String content, String author) {
-		this.id = id;
+	public BoardSaveRequestDto(String title, String content, String author) {
 		this.title = title;
 		this.content = content;
 		this.author = author;
@@ -25,7 +23,6 @@ public class BoardSaveRequestDto {
 	
 	public Board toRedisHash() {
 		return Board.builder()
-				.id(id)
 				.title(title)
 				.content(content)
 				.author(author)

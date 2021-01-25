@@ -20,10 +20,14 @@ public class Board {
 	private String author;
 	
 	@Builder
-	public Board(Long id, String title, String content, String author) {
-		this.id = id;
+	public Board(String title, String content, String author) {
 		this.title = title;
 		this.content = content;
 		this.author = author;
+	}
+	
+	public void update(String title, String content) {
+		this.title = title;
+		this.content = content;
 	}
 }

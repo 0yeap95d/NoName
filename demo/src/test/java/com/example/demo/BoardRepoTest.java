@@ -26,7 +26,7 @@ public class BoardRepoTest {
 	@Test
 	public void basicSave() {
 		// given
-		Board board = new Board(null, "title1", "content1", "author1");
+		Board board = new Board("title1", "content1", "author1");
 		
 		// when
 		Board savedBoard = boardRepo.save(board);

@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.board.BoardResponseDto;
 import com.example.demo.dto.board.BoardSaveRequestDto;
+import com.example.demo.dto.board.BoardUpdateRequestDto;
 import com.example.demo.entity.board.Board;
 import com.example.demo.repo.board.BoardRepo;
 
@@ -21,8 +22,15 @@ public class BoardService {
 		return boardRepo.save(requestDto.toRedisHash()).getId();
 	}
 	
-	public BoardResponseDto get(Long id) {
-		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Nothing saved. id=" + id));
+	@Transactional
+	public Long update(Long id, BoardUpdateRequestDto requestDto) {
+		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+		board.update(requestDto.getTitle(), requestDto.getContent());
+		return id;
+	}
+	
+	public BoardResponseDto findById(Long id) {
+		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 		return new BoardResponseDto(board);
 	}
 }
