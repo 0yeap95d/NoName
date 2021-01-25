@@ -13,14 +13,14 @@ import nonapi.io.github.classgraph.json.Id;
 public class UserEntity {
 
     @Id
-    private Long no;
+    private Long id;
     private String email;
     private String password;
     private String nickname;
 
     @Builder
-    public UserEntity(Long no, String email, String password, String nickname) {
-        this.no = no;
+    public UserEntity(Long id, String email, String password, String nickname) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;

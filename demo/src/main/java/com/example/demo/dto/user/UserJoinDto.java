@@ -13,20 +13,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserJoinDto {
 
-    private Long no;
+    private Long id;
     private String email;
     private String password;
     private String nickname;
 
     @Builder
-    public UserJoinDto(Long no, String email, String password, String nickname) {
-        this.no = no;
+    public UserJoinDto(Long id, String email, String password, String nickname) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
     }
 
     public UserEntity toEntity() {
-        return UserEntity.builder().no(no).email(email).password(password).nickname(nickname).build();
+        return UserEntity.builder().id(id).email(email).password(password).nickname(nickname).build();
     }
 }

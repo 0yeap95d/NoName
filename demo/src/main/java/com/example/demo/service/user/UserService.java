@@ -1,5 +1,7 @@
 package com.example.demo.service.user;
 
+import java.util.List;
+
 import com.example.demo.entity.user.UserEntity;
 import com.example.demo.repo.user.UserRepo;
 
@@ -24,11 +26,25 @@ public class UserService {
     // return new UserResponseEntity(userDto);
     // }
 
-    public UserEntity findByEmail(String email) {
-        return userRepo.findByEmail(email);
+    public List<UserEntity> findAll() {
+        return userRepo.findAll();
     }
 
-    public void delete() {
+    public UserEntity findById(Long id) {
+        UserEntity userEntity = userRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Nothing saved. id= " + id));
+        return userEntity;
+    }
+
+    public void save(UserEntity userEntity) {
+        userRepo.save(userEntity);
+    }
+
+    public void deleteById(Long id) {
+        userRepo.deleteById(id);
+    }
+
+    public void deleteAll() {
         userRepo.deleteAll();
     }
 
