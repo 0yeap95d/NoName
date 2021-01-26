@@ -12,10 +12,17 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParser;
+
+import springfox.documentation.spring.web.json.Json;
 
 /*
  * 네이버 쇼핑 API를 이용한 장비 검색 및 견적 추천 컨트롤러
@@ -27,7 +34,7 @@ public class RecommandController {
 	
 	
 	@GetMapping
-	public String getResponse() {
+	public JSONObject getResponse() {
 		String clientId = "SDaatdF9ZtdfFAFFOTRj";
 		String clientSecret = "Zo6n1UiPhV";
 		
@@ -45,7 +52,16 @@ public class RecommandController {
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 		String responseBody = get(apiURL, requestHeaders);
 		
-		return responseBody;
+		JSONParser parser = new JSONParser();
+		JSONObject obj = null;
+		
+		try {
+			obj = (JSONObject) parser.parse(responseBody);
+		} catch (ParseException e) {
+			throw new RuntimeException("Json 변환 실패", e);
+		}
+		
+		return obj;
 	}
 	
 	
