@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,10 +20,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonParser;
-
-import springfox.documentation.spring.web.json.Json;
 
 /*
  * 네이버 쇼핑 API를 이용한 장비 검색 및 견적 추천 컨트롤러
@@ -52,15 +49,24 @@ public class RecommandController {
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 		String responseBody = get(apiURL, requestHeaders);
 		
-		JSONParser parser = new JSONParser();
-		JSONObject obj = null;
+		JSONParser parser = new JSONParser(); // 문자열 데이터를 JSON 데이터로 파싱해주는 JSON Parser 객체
+		JSONObject obj = null; 
+		JSONArray items = null; 
 		
 		try {
-			obj = (JSONObject) parser.parse(responseBody);
+			obj = (JSONObject) parser.parse(responseBody); // 문자열 데이터를 JSON 데이터로 변환
+			items = (JSONArray) obj.get("items"); // JSON 객체에서 items 가져오기
 		} catch (ParseException e) {
 			throw new RuntimeException("Json 변환 실패", e);
 		}
 		
+		for(int i = 0; i < items.size(); i++) {
+			JSONObject item = (JSONObject) items.get(i);
+			
+			String maker = (String) item.get("maker");
+			
+			System.out.println(maker);
+		}
 		return obj;
 	}
 	
