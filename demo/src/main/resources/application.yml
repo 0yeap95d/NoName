@@ -1,4 +1,13 @@
+--- #redis 환경
 spring:
   redis:
     host: 127.0.0.1
     port: 6379
+
+--- #mongdb 환경
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: testdb
