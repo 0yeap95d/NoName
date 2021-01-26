@@ -18,18 +18,26 @@ public class BoardService {
 	private final BoardRepo boardRepo;
 	
 	@Transactional
-	public Long save(BoardSaveRequestDto requestDto) {
-		return boardRepo.save(requestDto.toRedisHash()).getId();
+	public String save(BoardSaveRequestDto requestDto) {
+		return boardRepo.save(requestDto.toEntity()).getId();
 	}
 	
 	@Transactional
-	public Long update(Long id, BoardUpdateRequestDto requestDto) {
+	public String update(String id, BoardUpdateRequestDto requestDto) {
 		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 		board.update(requestDto.getTitle(), requestDto.getContent());
+		boardRepo.save(board);
 		return id;
 	}
 	
-	public BoardResponseDto findById(Long id) {
+	@Transactional
+	public String delete(String id) {
+		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+		boardRepo.delete(board);
+		return id;
+	}
+	
+	public BoardResponseDto findById(String id) {
 		Board board = boardRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 		return new BoardResponseDto(board);
 	}

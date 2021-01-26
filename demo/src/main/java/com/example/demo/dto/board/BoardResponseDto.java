@@ -7,15 +7,15 @@ import lombok.Getter;
 @Getter
 public class BoardResponseDto {
 	
-	private Long id;
+	private String id;
 	private String title;
 	private String content;
 	private String author;
 	
-	public BoardResponseDto(Board redisHash) {
-		this.id = redisHash.getId();
-		this.title = redisHash.getTitle();
-		this.content = redisHash.getContent();
-		this.author = redisHash.getAuthor();
+	public BoardResponseDto(Board entity) {
+		this.id = entity.getId();
+		this.title = entity.getTitle();
+		this.content = entity.getContent();
+		this.author = entity.getAuthor();
 	}
 }

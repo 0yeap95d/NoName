@@ -1,7 +1,7 @@
 package com.example.demo.entity.board;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,11 +9,12 @@ import lombok.ToString;
 
 @ToString
 @Getter
-@RedisHash("board")
+//@RedisHash("board")
+@Document("board")
 public class Board {
 	
 	@Id
-	private Long id;
+	private String id;
 	
 	private String title;
 	private String content;

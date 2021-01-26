@@ -21,7 +21,7 @@ public class BoardSaveRequestDto {
 		this.author = author;
 	}
 	
-	public Board toRedisHash() {
+	public Board toEntity() {
 		return Board.builder()
 				.title(title)
 				.content(content)

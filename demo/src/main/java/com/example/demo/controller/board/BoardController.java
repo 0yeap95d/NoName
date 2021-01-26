@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,17 +41,22 @@ public class BoardController {
 	}
 	
 	@PostMapping("/board")
-	public Long save(@RequestBody BoardSaveRequestDto requestDto) {
+	public String save(@RequestBody BoardSaveRequestDto requestDto) {
 		return boardService.save(requestDto);
 	}
 	
 	@PutMapping("/board/{id}")
-	public Long update(@PathVariable Long id, @RequestBody BoardUpdateRequestDto requestDto) {
+	public String update(@PathVariable String id, @RequestBody BoardUpdateRequestDto requestDto) {
 		return boardService.update(id, requestDto);
 	}
 	
 	@GetMapping("/board/{id}")
-	public BoardResponseDto findById(@PathVariable Long id) {
+	public BoardResponseDto findById(@PathVariable String id) {
 		return boardService.findById(id);
+	}
+	
+	@DeleteMapping("/board/{id}")
+	public String delete(@PathVariable String id) {
+		return boardService.delete(id);
 	}
 }
