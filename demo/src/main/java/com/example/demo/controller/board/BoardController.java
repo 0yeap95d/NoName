@@ -31,7 +31,7 @@ public class BoardController {
 //	@GetMapping("/board")
 //	public String ok() {
 //		return "ok";
-//	}
+//	}//
 //	
 	@GetMapping("board/keys")
 	public String keys() {
