@@ -9,7 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.equipment.Equipment;
+
 /*
  * 네이버 쇼핑 API를 이용한 장비 검색 및 견적 추천 컨트롤러
  */
@@ -31,7 +35,7 @@ public class RecommandController {
 	
 	
 	@GetMapping
-	public JSONObject getResponse() {
+	public List<Equipment> getResponse() {
 		String clientId = "SDaatdF9ZtdfFAFFOTRj";
 		String clientSecret = "Zo6n1UiPhV";
 		
@@ -60,14 +64,23 @@ public class RecommandController {
 			throw new RuntimeException("Json 변환 실패", e);
 		}
 		
+		List<Equipment> list = new ArrayList<>();
+		
 		for(int i = 0; i < items.size(); i++) {
 			JSONObject item = (JSONObject) items.get(i);
 			
-			String maker = (String) item.get("maker");
+			Equipment e = Equipment.builder()
+					.name((String) item.get("title"))
+					.category((String) item.get("category2"))
+					.price((String) item.get("lprice"))
+					.maker((String) item.get("maker"))
+					.brand((String) item.get("brand"))
+					.build();
 			
-			System.out.println(maker);
+			list.add(e);
 		}
-		return obj;
+		
+		return list;
 	}
 	
 	

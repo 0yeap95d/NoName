@@ -20,6 +20,9 @@ public class Equipment {
 	// 장비 제조사
 	String maker;
 	
+	// 장비 브랜드
+	String brand;
+	
 	// 장비 가격
 	String price;
 	
