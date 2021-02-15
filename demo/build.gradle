@@ -32,9 +32,12 @@ dependencies {
 	// Swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
-
+	
 	// MongoDB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	
+	// JSON
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 test {
