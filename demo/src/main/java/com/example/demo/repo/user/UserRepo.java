@@ -1,5 +1,8 @@
 package com.example.demo.repo.user;
 
-public class UserRepo {
+import com.example.demo.entity.user.UserEntity;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface UserRepo extends MongoRepository<UserEntity, Long> {
 }
